@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yjk.biz.mapper.ApplMapper">
+  <resultMap id="BaseResultMap" type="com.yjk.biz.domain.Appl">
+    <result column="appl_cde" jdbcType="VARCHAR" property="applCde" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+
+  <insert id="insert" parameterType="com.yjk.biz.domain.Appl">
+    insert into appl (appl_cde, name)
+    values (#{applCde,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yjk.biz.domain.Appl">
+    insert into appl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="applCde != null">
+        appl_cde,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="applCde != null">
+        #{applCde,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+	<select id="select" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select appl_cde,name from appl
+	</select>
+</mapper>
